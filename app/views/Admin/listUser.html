@@ -1,0 +1,87 @@
+#{extends 'main.html' /}
+#{set title:'Admin' /}
+
+<script>
+$(document).ready(function(){
+	  $("#flashSuccess").delay(3000).slideUp(500);
+	});
+
+</script>
+
+#{if flash.success}
+    <p id="flashSuccess" class="success">${flash.success}</p>
+#{/if}   
+#{if users.size > 0}
+    <h2>Utilisateurs inscrits</h2>
+    <a href="@{Admin.exportUsers()}"><button class="btn">Export to csv</button></a>
+        <table>
+	        <tr>
+	            <th>Nom</th>
+	            <th>Prenom</th>
+	            <th>Tel</th>
+	            <th>Mail</th>
+	        </tr>
+	        #{list items:users, as:'user'}
+	           
+	            <tr>
+	               #{form @Admin.editUser(user.id)}
+	                    <td><input type="text" name="nom" value="${user.nom}"/></td>
+	                    <td><input type="text" name="prenom" value="${user.prenom}"/></td>
+	                    <td><input type="text" name="tel" value="${user.tel}"/></td>
+	                    <td><input type="text" name="mail" value="${user.mail}"/></td>
+	                    <td><input type="submit" class="btn" value="Save"/></td>
+                    #{/form }
+                    <td><a href="@{Admin.deleteUser(user.id)}"><button class="btn">Remove</button></a></td>
+                </tr>
+                
+	        </table>
+	        #{/list}
+#{/if}
+
+<!-- <div> -->
+<!--     #{form @Application.postProgramme()} -->
+<!--         #{if flash.success} -->
+<!--             <p class="success">${flash.success}</p> -->
+<!--         #{/if} -->
+<!--         #{ifErrors} -->
+<!--             <p class="error"> -->
+<!--                 Veuillez remplir les champs requis! -->
+<!--             </p> -->
+<!--         #{/ifErrors} -->
+        
+<!--         <p> -->
+<!--             <label for="debut">Date de debut: </label> -->
+<!--             <input type="date" name="debut" id="debut" /> -->
+<!--         </p> -->
+<!--         <p> -->
+<!--             <label for="fin">Date de fin : </label> -->
+<!--             <input type="date" name="fin" id="fin" /> -->
+<!--         </p> -->
+<!--                 <p> -->
+<!--             <label for="titre">Titre du programme: </label> -->
+<!--             <input type="text" name="titre" id="titre" /> -->
+<!--         </p> -->
+<!--         <p> -->
+<!--             <label for="auteur">Auteur: </label> -->
+<!--             <input type="text" name="auteur" id="auteur" /> -->
+<!--         </p> -->
+<!--         <p> -->
+<!--             <label for="detail">detail du programme: </label> -->
+<!--             <textarea name="detail" id="detail"></textarea> -->
+<!--         </p> -->
+<!--         <p> -->
+<!--             <label for="lieu">Lieu : </label> -->
+<!--             <input type="text" name="lieu" id="lieu" /> -->
+<!--         </p> -->
+<!--         <p> -->
+<!--             <input type="submit" value="Send !" /> -->
+<!--         </p> -->
+    
+<!--     #{/form} -->
+
+
+<!-- </div> -->
+
+#{else}
+    Pas d'utilisateur
+#{/else}

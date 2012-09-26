@@ -1,0 +1,55 @@
+#{extends 'main.html' /}
+#{set title:'Programme' /}
+
+#{if frontProgramme}
+    <div class="programme">
+        <h2 class="titre-programme">${frontProgramme.titre}</h2>
+        <div class="programme-metadata">
+            <span class="programme-date">debut : ${frontProgramme.debut.format('MMM dd')} - </span>
+            <span class="programme-date">fin : ${frontProgramme.fin.format('MMM dd')}</span>
+            <span class="post-commentaires">
+                &nbsp;|&nbsp; 
+                ${frontProgramme.commentaires.size() ? '' : 'pas de'} 
+                commentaire${frontProgramme.commentaires.size().pluralize()}</a>
+                #{if frontProgramme.commentaires}
+                    , dernier par ${frontProgramme.commentaires[0].auteur}
+                #{/if}
+            </span>
+        </div>
+        <div class="programme-detail">
+            <p>
+                <span>In ${frontProgramme.lieu}</span>
+                <span>By ${frontProgramme.auteur}</span>
+            </p>
+            <p>${frontProgramme.detail}</p>
+        </div>
+    </div>
+    
+    #{if laterProgrammes.size() > 1}
+        <div class="later-programme">
+            #{list items:laterProgrammes, as:'laterProgramme'}
+                <div class="programme">
+			        <h2 class="titre-programme">${frontProgramme.titre}</h2>
+			        <div class="programme-metadata">
+			            <span class="programme-date">debut : ${frontProgramme.debut.format('MMM dd')} - </span>
+			            <span class="programme-date">fin : ${frontProgramme.fin.format('MMM dd')}</span>
+			            <span class="post-commentaires">
+			                &nbsp;|&nbsp; 
+			                ${frontProgramme.commentaires.size() ?: 'pas de'} 
+			                commentaire${frontProgramme.commentaires.size().pluralize()}</a>
+			                #{if frontProgramme.commentaires}
+			                    , dernier par ${frontProgramme.commentaires[0].auteur}
+			                #{/if}
+			            </span>
+			        </div>
+			    </div>
+            #{/list}
+        </div>
+    #{/if}    
+#{/if}
+
+#{else}
+    <div class="empty">
+        Aucun Programme n'est prevu.
+    </div>
+#{/else}

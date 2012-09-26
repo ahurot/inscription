@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta charset="${_response_encoding}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        #{stylesheet "bootstrap.min.css" /}
+        
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<!--         <script src="@{'/public/javascripts/bootstrap.min.js'}" type="text/javascript" charset="${_response_encoding}"></script> -->
+        #{get 'moreScripts' /}
+
+
+    </head>
+    <body>
+        <div class="container head">
+            <img src="@{'/public/images/header.png'}"/>
+        </div>
+        
+        <div class="container">
+			<ul class="nav nav-tabs">
+			    <li class="active"><a href="@{Application.index()}">Présentation</a></li>
+			    <li><a href="@{Application.inscription()}">Inscription</a></li>
+			    <li><a href="@{Application.programme()}">Programme</a></li>
+	            <li><a href="@{Application.association()}">Association</a></li>
+                #{if session.get('admin.identifiant')}
+                    <li><a href="@{Mailing.show()}">Mailing</a></li>
+                    <li><a href="@{Admin.desinscription()}">Desinscription</a></li>
+                    <li><a href="@{Admin.listUser()}">Admin</a></li>
+                #{/if}
+                #{else}
+    	            <li><a href="@{Application.connection()}">Connection</a></li>
+    	        #{/else}
+		    </ul>
+		    #{if session.get('admin.identifiant')}
+		      #{form @Admin.logout()}
+		      <div>
+		          Connect as ${session.get('admin.identifiant')}
+		          <a href="@{Admin.logout()}">Déconnection</a>
+		      </div>
+		      #{/form}
+		    #{/if}
+	        #{doLayout /}
+        </div>
+
+    </body>
+
+
+
+    
+</html>
