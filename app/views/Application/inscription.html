@@ -7,32 +7,33 @@
             <p class="success">${flash.success}</p>
         #{/if}
 	    <p>
-	        <label for="nom">Your name: </label>
+	        <label for="name">&{'name'}: </label>
 	        <input type="text" name="nom" id="nom" value="${flash.nom}" />
 	        <span class="error">#{error 'nom' /}</span>
 	    </p>
 	    <p>
-	        <label for="prenom">Your surname: </label>
+	        <label for="firstName">&{'firstName'}: </label>
 	        <input type="text" name="prenom" id="prenom" value="${flash.prenom}"/>
 	        <span class="error">#{error 'prenom' /}</span>
 	    </p>
 	    <p>
-	        <label for="tel">Your phone number: </label>
+	        <label for="phoneNumber">&{'phoneNumber'}: </label>
 	        <input type="text" name="tel" id="tel" value="${flash.tel}" />
 	        <span class="error">#{error 'tel' /}</span>
 	        <span class="error">#{error 'phone' /}</span>
 	    </p>
 	    <p>
-	        <label for="mail">Your mail adress: </label>
+	        <label for="email">email: </label>
 	        <input type="text" name="mail" id="mail" value="${flash.mail}"/>
 	        <span class="error">#{error 'mail' /}</span>
 	    </p>
 	    <p>
-	        <label for="commentaire">any comment ?: </label>
+	        <label for="comments">Remarques: </label>
 	        <textarea name="commentaire" id="commentaire" value="${flash.commentaire}"></textarea>
 	    </p>
 	    <p>
-	        <input type="submit" value="Send !" />
+	        <input type="submit" value="S'inscrire" />
 	    </p>
     #{/form}
+    <div>un email de confirmation vous sera envoyé.<div>
 </div>

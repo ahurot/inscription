@@ -3,8 +3,8 @@ package controllers;
 import java.util.Date;
 import java.util.List;
 
-import models.Administrateur;
-import models.Programme;
+import models.Administrator;
+import models.Program;
 import models.User;
 import play.data.validation.Required;
 import play.mvc.Controller;
@@ -12,21 +12,25 @@ import play.mvc.Controller;
 public class Application extends Controller {
 
 	public static void index() {
-		new Administrateur("admin", "admin").save();
-		new Programme(new Date(2012, 10, 1), new Date(2012, 10, 3), "titre", "detail", "auteur", "lieu").save();
 		render();
 	}
 
+	public static void init() {
+		new Administrator("admin", "admin").save();
+		new Program(new Date(2012, 10, 1, 12,0,0), new Date(2012, 10, 1, 12, 30,0), "introduction", "présentation du Sessad Anatole France", "Mr Lefort", "Amphi 3").save();
+		new Program(new Date(2012, 10, 1, 14, 00, 0), new Date(2012, 10, 1, 15,0, 0), "présentation 1", "présentation du SAT Le Robec", "Mr Lefort", "Amphi 4").save();
+		new Program(new Date(2012, 10, 1, 15, 00, 0), new Date(2012, 10, 1, 17, 45, 0), "cloture", "mot du président", "Bertrand Hauguel", "Amphi 2").save();
+		render();
+	}
+	
 	public static void inscription() {
 		render();
 	}
 
 	public static void programme() {
+		List<Program> laterProgrammes = Program.find("order by begin asc").fetch();
 
-		Programme frontProgramme = Programme.find("order by debut asc").first();
-		List<Programme> laterProgrammes = Programme.find("order by debut asc").from(1).fetch(5);
-
-		render(frontProgramme, laterProgrammes);
+		render(laterProgrammes);
 	}
 
 	public static void association() {
@@ -56,7 +60,7 @@ public class Application extends Controller {
 			render("Application/admin.html");
 		}
 
-		new Programme(debut, fin, titre, detail, auteur, lieu).save();
+		new Program(debut, fin, titre, detail, auteur, lieu).save();
 		flash.success("Programme ajouté avec succès");
 		render("Application/admin.html");
 	}
