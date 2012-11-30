@@ -4,32 +4,35 @@
     <head>
         <title>#{get 'title' /}</title>
         <meta charset="${_response_encoding}">
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
-    	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-    	<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
-    	<script>
-    		$(function() {
-        		$( "#tabs" ).tabs();
-    		});
-    	</script>
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        #{stylesheet "bootstrap.min.css" /}
+        
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+        <script src="@{'/public/javascripts/jquery-1.6.4.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+<!--         <script src="@{'/public/javascripts/bootstrap.min.js'}" type="text/javascript" charset="${_response_encoding}"></script> -->
+        #{get 'moreScripts' /}
+
+
     </head>
     <body>
-    	<div class="container head">
+        <div class="container head">
             <img src="@{'/public/images/front.jpeg'}"/>
         </div>
-        <div id="tabs">
-			<ul>
-			    <li><a href="@{Application.index()}">Présentation</a></li>
-			    <li><a href="@{Application.inscription()}">Inscription</a></li>
-			    <li><a href="@{Application.programme()}">Programme</a></li>
-	            <li><a href="@{Application.association()}">Association</a></li>
+        
+        <div class="container">
+			<ul class="nav nav-tabs">
+			    <li class="${request.controller == 'Application' ? '' : 'in'}active"><a href="@{Application.index()}">Présentation</a></li>
+			    <li class="${request.controller == 'Inscription' ? '' : 'in'}active"><a href="@{Inscription.inscription()}">Inscription</a></li>
+			    <li class="${request.controller == 'Programme' ? '' : 'in'}active"><a href="@{Programme.programme()}">Programme</a></li>
+	            <li class="${request.controller == 'Association' ? '' : 'in'}active"><a href="@{Association.association()}">Association</a></li>
                 #{if session.get('admin.identifiant')}
                     <li><a href="@{Mailing.show()}">Mailing</a></li>
-                    <li><a href="@{Admin.desinscription()}">Désinscription</a></li>
+                    <li><a href="@{Admin.desinscription()}">Desinscription</a></li>
                     <li><a href="@{Admin.listUser()}">Admin</a></li>
                 #{/if}
                 #{else}
-    	            <li><a href="@{Application.connection()}">Connection</a></li>
+    	            <li><a href="@{Admin.connection()}">Connection</a></li>
     	        #{/else}
 		    </ul>
 		    #{if session.get('admin.identifiant')}
@@ -39,8 +42,13 @@
 		          <a href="@{Admin.logout()}">Déconnection</a>
 		      </div>
 		      #{/form}
-		    #{/if}	       
+		    #{/if}
+	        #{doLayout /}
         </div>
-         #{doLayout /}
+
     </body>
+
+
+
+    
 </html>

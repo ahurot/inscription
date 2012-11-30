@@ -2,7 +2,7 @@
 #{set title:'Inscription' /}
 
 <div>
-    #{form @Application.postInscription()}
+    #{form @Inscription.postInscription()}
         #{if flash.success}
             <p class="success">${flash.success}</p>
         #{/if}

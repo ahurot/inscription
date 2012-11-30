@@ -1,9 +1,11 @@
 package controllers;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import models.Administrator;
+import models.Program;
 import models.User;
 import play.data.validation.Required;
 import play.mvc.Controller;
@@ -15,15 +17,15 @@ public class Admin extends Controller {
 	public static void connect(@Required String nom, @Required String password) {
 
 		if (validation.hasErrors()) {
-			render(Router.getFullUrl("Application.connection"));
+			render("Admin/connection.html");
 		}
 
-		if (Administrator.find("select a from Administrateur a where a.nom = ? and a.motDePasse = ?", nom, password).first() != null) {
+		if (Administrator.find("select a from Administrator a where a.name = ? and a.password = ?", nom, password).first() != null) {
 			session.put("admin.identifiant", nom);
-			redirect(Router.getFullUrl("Application.index"));
+			render("Admin/connection.html");
 		} else {
 			flash.error("Erreur de connection");
-			render(Router.getFullUrl("Application.connection"));
+			render("Admin/connection.html");
 		}
 	}
 
@@ -73,6 +75,21 @@ public class Admin extends Controller {
 
 	public static void desinscription() {
 		render();
+	}
+	public static void connection() {
+		render();
+	}
+	
+	public static void postProgramme(@Required Date debut, @Required Date fin, @Required String titre, @Required String detail, @Required String auteur,
+			@Required String lieu) {
+
+		if (validation.hasErrors()) {
+			render("Application/admin.html");
+		}
+
+		new Program(debut, fin, titre, detail, auteur, lieu).save();
+		flash.success("Programme ajouté avec succès");
+		render("Application/admin.html");
 	}
 
 }

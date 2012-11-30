@@ -1,0 +1,26 @@
+#{extends 'main.html' /}
+#{set title:'Connection' /}
+
+<div>
+    #{if flash.error}
+        <p class="error">${flash.error}</p>
+    #{/if}
+    #{ifErrors}
+	    <p class="error">
+	        Les 2 champs sont necessaires
+	    </p>
+    #{/ifErrors}
+    #{form @Admin.connect()}
+        <p>
+		    <label for="nom">Identifiant</label>
+		    <input type="text" name="nom" id="nom"/>
+	    </p>
+	    <p>
+		    <label for="password">Mot de passe</label>
+		    <input type="password" name="password" id="password"/>
+	    </p>
+	    <p>
+		    <input type="submit" value="Connect !"/>
+	    </p>
+    #{/form}
+</div>

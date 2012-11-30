@@ -15,4 +15,8 @@ public class Administrator extends Model {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return "Administrator [name=" + this.name + ", password=" + this.password + "]";
+	}
 }

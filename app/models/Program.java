@@ -30,6 +30,24 @@ public class Program extends Model {
 		this.detail = detail;
 		this.author = author;
 		this.location = location;
+	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Program [begin=");
+		builder.append(begin);
+		builder.append(", end=");
+		builder.append(end);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", detail=");
+		builder.append(detail);
+		builder.append(", author=");
+		builder.append(author);
+		builder.append(", location=");
+		builder.append(location);
+		builder.append("]");
+		return builder.toString();
 	}
 }
