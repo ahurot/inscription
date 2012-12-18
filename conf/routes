@@ -10,7 +10,6 @@ GET     /programme                              Programme.programme
 GET     /association                            Association.association
 GET     /listUser                               Admin.listUser
 GET     /mailing                                Mailing.show
-GET     /desinscription                         Admin.desinscription
 GET     /connection                             Admin.connection
 GET     /logout                                 Admin.logout
    

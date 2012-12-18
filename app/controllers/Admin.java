@@ -20,9 +20,9 @@ public class Admin extends Controller {
 			render("Admin/connection.html");
 		}
 
-		if (Administrator.find("select a from Administrator a where a.name = ? and a.password = ?", nom, password).first() != null) {
+		if (Administrator.filter("name",nom).filter("password", password).first() != null) {
 			session.put("admin.identifiant", nom);
-			render("Admin/connection.html");
+			Admin.listUser();
 		} else {
 			flash.error("Erreur de connection");
 			render("Admin/connection.html");
@@ -38,7 +38,7 @@ public class Admin extends Controller {
 
 	public static void deleteUser(String userid) {
 
-		User user = User.findById(Long.valueOf(userid));
+		User user = User.findById(userid);
 		user.delete();
 		flash.success("L'utilisateur a bien été supprimé");
 		listUser();
@@ -46,7 +46,7 @@ public class Admin extends Controller {
 
 	public static void editUser(String userid, String nom, String prenom, String tel, String mail) {
 
-		User user = User.findById(Long.valueOf(userid));
+		User user = User.findById(userid);
 		user.name = nom;
 		user.firstName = prenom;
 		user.phoneNumber = tel;
@@ -73,9 +73,6 @@ public class Admin extends Controller {
 		redirect(Router.getFullUrl("Application.index"));
 	}
 
-	public static void desinscription() {
-		render();
-	}
 	public static void connection() {
 		render();
 	}

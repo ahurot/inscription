@@ -1,3 +1,4 @@
-name=nom
-firstName=Prénom
-phoneNumber=numéro de téléphone
+name=last name
+firstName=first name
+phoneNumber=phone number
+success=Your subscription is ok

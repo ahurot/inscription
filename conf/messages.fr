@@ -1,3 +1,4 @@
 name=nom
 firstName=Prénom
 phoneNumber=numéro de téléphone
+success=Votre inscription a bien été prise en compte.
