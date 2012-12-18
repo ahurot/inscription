@@ -8,7 +8,7 @@ import play.mvc.Controller;
 public class Programme extends Controller {
 
 	public static void programme() {
-		List<Program> laterProgrammes = Program.find("order by begin asc").fetch();
+		List<Program> laterProgrammes = Program.find().order("-begin").asList();
 
 		render(laterProgrammes);
 	}

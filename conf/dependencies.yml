@@ -2,3 +2,13 @@
 
 require:
     - play
+    - play -> morphia 1.2.12
+    - com.google.code.morphia -> morphia 1.00-SNAPSHOT
+    
+repositories:
+    - morphia:
+         type: iBiblio
+         root: "http://morphia.googlecode.com/svn/mavenrepo/"
+         contains:
+             - com.google.code.morphia -> *
+    

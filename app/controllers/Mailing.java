@@ -15,7 +15,7 @@ public class Mailing extends Controller {
 
 	public static void show() {
 
-		List<User> users = User.find("byIsPresent", true).fetch();
+		List<User> users = User.filter("byIsPresent", true).asList();
 
 		render(users);
 	}

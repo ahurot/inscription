@@ -1,8 +1,9 @@
 package models;
 
-import javax.persistence.Entity;
 
-import play.db.jpa.Model;
+import play.modules.morphia.Model;
+
+import com.google.code.morphia.annotations.Entity;
 
 @Entity
 public class Administrator extends Model {
